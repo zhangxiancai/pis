@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doit.dao2.InspectionTaskMapper">
+	<resultMap id="InspectionTaskMap" type="InspectionTask">
+
+		<id column="inspection_task_code" jdbcType="VARCHAR" property="inspectionTaskCode" />
+		<result column="inspection_task_name" jdbcType="VARCHAR"
+			property="inspectionTaskName" />
+		<result column="line_code" jdbcType="VARCHAR" property="lineCode" />
+		<result column="inspection_task_startbar" jdbcType="VARCHAR"
+			property="inspectionTaskStartbar" />
+		<result column="inspection_task_endbar" jdbcType="VARCHAR"
+			property="inspectionTaskEndbar" />
+		<result column="inspection_task_release_date" jdbcType="DATE"
+			property="inspectionTaskReleaseDate" />
+		<result column="inspection_task_remark" jdbcType="VARCHAR"
+			property="inspectionTaskRemark" />
+	</resultMap>
+	<select id="selectAllInspectionTask" resultMap="InspectionTaskMap">
+		SELECT * FROM inspection_task
+	</select>
+
+	<insert id="insertInspectionTask" parameterType="InspectionTask">
+		insert into inspection_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="inspectionTaskCode != null">
+				inspection_task_code,
+			</if>
+			<if test="inspectionTaskName != null">
+				inspection_task_name,
+			</if>
+			<if test="lineCode != null">
+				line_code,
+			</if>
+			<if test="inspectionTaskStartbar != null">
+				inspection_task_startbar,
+			</if>
+			<if test="inspectionTaskEndbar != null">
+				inspection_task_endbar,
+			</if>
+			<if test="inspectionTaskReleaseDate != null">
+				inspection_task_release_date,
+			</if>
+			<if test="inspectionTaskRemark != null">
+				inspection_task_remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="inspectionTaskCode != null">
+				#{inspectionTaskCode,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectionTaskName != null">
+				#{inspectionTaskName,jdbcType=VARCHAR},
+			</if>
+			<if test="lineCode != null">
+				#{lineCode,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectionTaskStartbar != null">
+				#{inspectionTaskStartbar,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectionTaskEndbar != null">
+				#{inspectionTaskEndbar,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectionTaskReleaseDate != null">
+				#{inspectionTaskReleaseDate,jdbcType=DATE},
+			</if>
+			<if test="inspectionTaskRemark != null">
+				#{inspectionTaskRemark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+
+
+
+
+
+
+
+	<select id="selectTemp" resultType="int">
+		SELECT temp_value FROM temp
+		WHERE temp_key='temp'
+	</select>
+	<update id="updateTemp" parameterType="int">
+		UPDATE temp SET temp_value=#{temp} WHERE temp_key='temp'
+	</update>
+
+
+</mapper>
